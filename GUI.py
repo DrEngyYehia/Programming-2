@@ -7,8 +7,20 @@ window.title("Bank Misr , plan your loan application")
 window.geometry("1000x500+200+50")
 
 def Calculate():
-    amount_of_money = float(E2.get())
-    number_of_years = int(E3.get())
+    try:
+        amount_of_money = float(E2.get())  # Attempt to convert to float
+    except ValueError:
+        showerror("showerror","Please enter a valid numerical value for the amount of money.")
+         # Display the error message
+        return
+
+    try:
+        number_of_years = int(E3.get())  # Attempt to convert to float
+    except ValueError:
+        showerror("showerror","Please enter a valid year for the duration of loan .")
+         # Display the error message
+        return
+
     if number_of_years==1:
         interest_in_one_year = int((amount_of_money * (13.76 / 100)))
         total_interset = int((interest_in_one_year * number_of_years))
@@ -37,8 +49,8 @@ def Calculate():
         pay_per_month = int((total_loan / (number_of_years * 12)))
         output_text = f"interest in one year: {interest_in_one_year}\n"f"total interest: {total_interset}\n" \
                       f"total loan: {total_loan}\n"f"payment per month: {pay_per_month}"
-    elif number_of_years!= int() or amount_of_money!= float():
-        showerror("showerror","error")
+    else :
+        showerror("showerror","invalid number of years")
     output_label.config(text=output_text)
 def clear():
 
@@ -78,7 +90,7 @@ l2 = Label(f2,text="enter loan amount:",bg="yellow",font=("Aerial 16 bold italic
 l2.pack()
 E2 =Entry(f3,bd=5,bg="yellow",font=("Aerial 16 bold italic"))
 E2.pack()
-l3 = Label(f2,text="enter loan years:",bg="light blue",font=("Aerial 16 bold italic"),pady=5)
+l3 = Label(f2,text="enter duration of loan:",bg="light blue",font=("Aerial 16 bold italic"),pady=5)
 l3.pack()
 E3 = Entry(f3,bd=5,font=("Aerial 16 bold italic"),bg='light blue')
 E3.pack()
